@@ -1,0 +1,42 @@
+from astropy.io import fits
+from astroquery.mast import Observations
+from matplotlib.colors import LogNorm
+
+
+
+import matplotlib.pyplot as plt
+import csv
+
+
+                
+def telechargement(objet: str):
+    """ Fonction qui recupère les données d'une observation JWST et les télécharge. """
+    
+    obs = Observations.query_criteria(obs_collection='JWST',instrument_name='NIRCAM',proposal_id=['1783'],)
+   
+    print(f"Observations trouvées: {obs}")
+
+    data_products = Observations.get_product_list(obs)
+
+
+    dowload_fits = Observations.download_products(data_products, productType="SCIENCE", extension="fits")
+    print(f"téléchargement: {dowload_fits}")
+
+    if dowload_fits is None or len(dowload_fits) == 0:
+        raise ValueError("Aucun produit téléchargé.")
+
+    # Récupérer le chemin local du premier fichier téléchargé
+    path = dowload_fits['Local Path'][0]
+    print(f"Chemin local du fichier téléchargé: {path}")
+
+    return path
+
+
+# Charger le fichier FITS
+obs_dowload = fits.getdata(telechargement('objet_choisi'))
+
+# Afficher l’image
+plt.imshow (obs_dowload, norm=LogNorm() , origin='lower', cmap='viridis')
+plt.title('JWST')
+plt.colorbar()
+plt.show()
