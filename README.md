@@ -5,7 +5,7 @@
 Algorithme du 16 janvier 
 
 
-NouveauxFits.py :
+NouveauxFits.py 
 
     - Classe qui permet de créer (télécharger) des fichiers fit(s) dans un dossier image.
 
