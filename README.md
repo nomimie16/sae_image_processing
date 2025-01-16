@@ -1,7 +1,4 @@
-# sae_image_processing
-
-
-## SAE - Traitement d'images Astrophoto
+### SAE - Traitement d'images Astrophoto
 Algorithme du 16 janvier 
 
 
