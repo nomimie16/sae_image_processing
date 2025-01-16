@@ -32,6 +32,7 @@ class NouveauxFits:
         self.object = object
             
     def telecharger_fits(self, paths): 
+        # fonction qui télécharge les fits grace à une liste récupérée par le programme sur Skyview
         # paths = SkyView.get_images(position=self.object, surveys=self.surveyss)
 
         for i, img in enumerate(paths):
@@ -43,6 +44,7 @@ class NouveauxFits:
         return data
     
     def fits_existe(self, paths):
+        # fonction qui vérifie si les fits existent
         existe :bool =False
         for i, img in enumerate(paths):
             filename = os.path.join('./images', f"{self.object}_{self.surveys[i]}.fit")
@@ -52,6 +54,7 @@ class NouveauxFits:
                 existe=False
     
     def supprimer_fits(self, paths):
+        # fonction qui supprime les fits
         for i, img in enumerate(paths):
             filename = os.path.join('./images', f"{self.object}_{self.surveys[i]}.fit")
             print(f"Image supprimée : {filename}")
@@ -60,6 +63,7 @@ class NouveauxFits:
             
             
     def afficher_fits(self,data):
+    # fonction qui affiche les fits à l'aide de matplotlib
         plt.imshow(data, norm=LogNorm(), origin='lower', cmap='viridis')
         plt.colorbar()
         plt.show()
