@@ -11,6 +11,7 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as Navigatio
 from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QComboBox, QListWidget, QLineEdit, QToolBar, QCompleter
 from modele import Modele
 from astropy.io import fits
+import json
 import NouveauxFits, Traitement
 
 
@@ -157,26 +158,25 @@ class VueAstroPy(QMainWindow):
         mFits : NouveauxFits = NouveauxFits.NouveauxFits(object_searched)    
         paths : list = SkyView.get_images(position=mFits.object, survey=mFits.surveys, pixels = pixel_searched)
         
-        # if paths == None:
-        #     print("erreur : objet non trouvé")
+        if paths == None:
+            print("erreur : objet non trouvé")
         
-        # if mFits.fits_existe(paths):
-        #     mFits.supprimer_fits()
-        # else:
-        #     data = mFits.telecharger_fits(paths)
-        #     chemin = mFits.chemin_fits(paths, filter_searched)            
-        #     # mFits.supprimer_fits(paths)
+        if mFits.fits_existe(paths):
+            mFits.supprimer_fits()
+        else:
+            data = mFits.telecharger_fits(paths)
+            # mFits.supprimer_fits(paths)
         
         # print("FILTRRRRRE",filter_searched)
-        
         traitement = Traitement.Traitement(mFits,paths)
         traitement.load_fits_data()
         traitement.normalize_data()
         data_img = traitement.getColors()
+        data_str = json.dumps(data_img.tolist())
         
-        # print(chemin)
+        # print(data_img)
+        self.loadBtnClicked.emit(data_str)
         mFits.supprimer_cache()
-        # self.loadBtnClicked.emit(chemin)
         
         return data_img
     

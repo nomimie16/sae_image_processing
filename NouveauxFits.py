@@ -1,7 +1,7 @@
 from astropy.io import fits
 from astroquery.skyview import SkyView
 from matplotlib.colors import LogNorm
-import matplotlib.C as plt
+import matplotlib.pyplot as plt
 import os
 import random
 
@@ -40,7 +40,6 @@ class NouveauxFits:
     def setObject(self, object):
         self.object = object
         
-    import os
 
     def chemin_fits(self, paths, survey):
         if paths:
@@ -125,7 +124,7 @@ class NouveauxFits:
         
 if __name__ == '__main__':
     
-    mFits : NouveauxFits = NouveauxFits('M104')
+    mFits : NouveauxFits = NouveauxFits('M82')
     # mFits = NouveauxFits()
     
     paths : list = SkyView.get_images(position=mFits.object, survey=mFits.surveys, pixels=100)
