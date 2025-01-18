@@ -10,8 +10,8 @@ class NouveauxFits:
     
     def __init__(self, object=None):
         # filtres
-        # self.surveys = ['DSS2 Red', 'DSS2 Blue', 'DSS2 IR']
-        self.surveys = ['2MASS-J', '2MASS-H', '2MASS-K']
+        self.surveys = ['DSS2 Red', 'DSS2 Blue', 'DSS2 IR']
+        # self.surveys = ['2MASS-J', '2MASS-H', '2MASS-K']
         # self.surveys = ['SwiftXRTCnt', 'SwiftXRTExp', 'SwiftXRTInt']
         # self.surveys = ['RASS Background 1', 'RASS Background 2', 'RASS Background 3']
         
