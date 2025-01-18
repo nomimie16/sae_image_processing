@@ -100,7 +100,7 @@ class VueAstroPy(QMainWindow):
         self.selection.addWidget(self.labelFilter)
         self.selection.addWidget(self.researchFilter)
         self.selection.addWidget(self.labelPixel)
-        self.selection.addWidget(self.listPixel)
+        self.selection.addWidget(self.listPixel) 
         
         # bouton valider
         self.btnValidate = QPushButton("GO ! 🚀")
