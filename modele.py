@@ -15,7 +15,7 @@ class Modele:
     
     #récupère l'image par défaut
     def load_image_default(self):
-        img_path = "C:/Users/lIcha/Documents/but/2_SAE/SAE_ASTRO_PHOTO/appli/img/logo.png"
+        img_path = "./img/logo.png"
         if os.path.exists(img_path):
             return plt.imread(img_path)
         else:
