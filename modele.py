@@ -15,7 +15,7 @@ class Modele:
     
     #récupère l'image par défaut
     def load_image_default(self):
-        img_path = "./img/logo.png"
+        img_path = "./img/notice.png"
         if os.path.exists(img_path):
             return plt.imread(img_path)
         else:

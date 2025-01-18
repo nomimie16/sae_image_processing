@@ -80,26 +80,9 @@ class VueAstroPy(QMainWindow):
         self.researchObject.setFixedSize(210,40)
         self.researchObject.setPlaceholderText('Rechercher un objet ici')
         self.researchObject.setCompleter(resultObject)
+
         
-        
-        # choix du filtre
-        self.labelFilter = QLabel("Choisir un filtre :")
-        self.labelFilter.setFont(fontBig)
-        listFilter = ['Bleu', 'InfraRouge', 'Rouge']
-        listFilter.sort()
-        
-        resultFilter = QCompleter(listFilter, self)
-        resultFilter.setCompletionMode(QCompleter.CompletionMode.PopupCompletion)
-        resultFilter.setMaxVisibleItems(10)
-        resultFilter.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
-        
-        self.researchFilter = QLineEdit()
-        self.researchFilter.setFont(fontBig)
-        self.researchFilter.setFixedSize(210,40)
-        self.researchFilter.setPlaceholderText('Ajouter un filtre ici')
-        self.researchFilter.setCompleter(resultFilter)
-        
-        # choix du filtre
+        # choix du nb pixel
         self.labelPixel = QLabel("Choisir un nombre de pixel :")
         self.labelPixel.setFont(fontBig)
         self.listPixel = QComboBox()
@@ -110,18 +93,16 @@ class VueAstroPy(QMainWindow):
 
         #ajout dans le layout puis la fenetre
         self.selection.addWidget(self.labelObject)
-        self.selection.addSpacing(-40)
+        self.selection.addSpacing(-80)
         self.selection.addWidget(self.researchObject)
-        self.selection.addWidget(self.labelFilter)
-        self.selection.addSpacing(-40)
-        self.selection.addWidget(self.researchFilter)
         self.selection.addWidget(self.labelPixel)
-        self.selection.addSpacing(-40)
+        self.selection.addSpacing(-80)
         self.selection.addWidget(self.listPixel) 
         self.selection.addSpacing(100)
         
         # bouton valider
         self.btnValidate = QPushButton("GO ! 🚀")
+        self.btnValidate.setObjectName("bothButton")
         self.btnValidate.setFixedSize(210,40)
         self.btnValidate.setFont(fontBig)
         self.selection.addWidget(self.btnValidate)
@@ -129,6 +110,7 @@ class VueAstroPy(QMainWindow):
         
         # FERMETURE DE LA FENÊTRE --------------------------------------------
         self.btnClose = QPushButton("Fermer ❌")
+        self.btnClose.setObjectName("bothButton")
         self.btnClose.setFixedSize(210,40)
         self.btnClose.setFont(fontBig)
         self.selection.addWidget(self.btnClose)
@@ -166,18 +148,9 @@ class VueAstroPy(QMainWindow):
     def nouveaux_fits(self):
         
         object_searched = self.researchObject.text()
-        filter_searched = self.researchFilter.text()
         pixel_searched = self.listPixel.currentText()
-        match filter_searched:
-            case "InfraRouge" | "infrarouge" | 'Infrarouge':
-                filter_searched = "DSS2 IR"
-            case "Rouge" | "rouge" :
-                filter_searched = "DSS2 Red"
-            case "Bleu" | "bleu" :
-                filter_searched = "DSS2 Blue"
                 
         print(object_searched)
-        print(filter_searched)
         print(pixel_searched)
         
         mFits : NouveauxFits = NouveauxFits.NouveauxFits(object_searched)                    
@@ -190,7 +163,7 @@ class VueAstroPy(QMainWindow):
             mFits.supprimer_fits()
         else:
             data = mFits.telecharger_fits(paths)
-            chemin = mFits.chemin_fits(paths, filter_searched)            
+            chemin = mFits.chemin_fits(paths)            
             mFits.supprimer_fits(paths)
         
         mFits.supprimer_cache()
@@ -204,7 +177,6 @@ class VueAstroPy(QMainWindow):
         if img_default is not None:
             self.ax.clear()
             self.ax.imshow(img_default)
-            self.ax.set_title('Image par défaut')
             self.ax.axis('off')
             self.canvas.draw()
             
