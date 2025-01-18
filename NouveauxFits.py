@@ -104,6 +104,7 @@ class NouveauxFits:
         plt.imshow(data, norm=LogNorm(), origin='lower', cmap='plasma')
         plt.colorbar()
         plt.show()
+        
     
     def supprimer_cache(self):
         SkyView.clear_cache()
