@@ -63,7 +63,7 @@ class NouveauxFits:
             
             
     def afficher_fits(self,data):
-    # fonction qui affiche les fits à l'aide de matplotlib
+        # fonction qui affiche les fits à l'aide de matplotlib
         plt.imshow(data, norm=LogNorm(), origin='lower', cmap='viridis')
         plt.colorbar()
         plt.show()
@@ -73,10 +73,13 @@ class NouveauxFits:
         
 if __name__ == '__main__':
     
-    mFits : NouveauxFits = NouveauxFits('M82')
+    mFits : NouveauxFits = NouveauxFits('M33')
     # mFits = NouveauxFits()
     
     paths : list = SkyView.get_images(position=mFits.object, survey=mFits.surveys)
+    
+    if paths == None:
+        print("erreur : objet non trouvé")
     
     if mFits.fits_existe(paths):
         mFits.supprimer_fits()
