@@ -3,7 +3,6 @@
 import sys
 from PyQt6.QtWidgets import QApplication
 from controleur import Controleur
-from vue import VueAstroPy
 
 
 if __name__ == '__main__':
@@ -11,12 +10,11 @@ if __name__ == '__main__':
     print(f' --- main --- ')
     
     app = QApplication(sys.argv)
-    # vue = VueAstroPy()
     
-    # fichier_style = open(sys.path[0] + '/style.qss', 'r')
-    # with fichier_style :
-    #     qss = fichier_style.read()
-    #     # app.setStyleSheet(qss)
+    fichier_style = open(sys.path[0] + '/style.qss', 'r')
+    with fichier_style :
+        qss = fichier_style.read()
+        app.setStyleSheet(qss)
     
     controleur = Controleur()
     sys.exit(app.exec())

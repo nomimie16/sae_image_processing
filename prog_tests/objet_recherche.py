@@ -1,6 +1,7 @@
 from astroquery.mast import Mast
 from astroquery.mast import Observations
 from astropy.io import fits
+import numpy as np
 
 
 
@@ -22,3 +23,11 @@ print("GET PRODUCT LIST ", files[0])
 Observations.download_products(files, productType="SCIENCE", extension="fits")
 print("Téléchargement terminé.")
 
+def normalize_data(self):
+    color = []
+    for img in self.image_list:
+        vmin, vmax = np.percentile(img, [1, 99])
+        normalized = np.clip((img - vmin) / (vmax - vmin), 0, 1)
+        color.append(normalized)
+    self.colors = np.destack([color[0],color[1],color[2]])
+    
