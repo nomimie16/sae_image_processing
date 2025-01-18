@@ -11,7 +11,7 @@ if __name__ == '__main__':
     print(f' --- main --- ')
     
     app = QApplication(sys.argv)
-    vue = VueAstroPy()
+    # vue = VueAstroPy()
     
     # fichier_style = open(sys.path[0] + '/style.qss', 'r')
     # with fichier_style :

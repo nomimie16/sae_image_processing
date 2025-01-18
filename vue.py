@@ -134,7 +134,7 @@ class VueAstroPy(QMainWindow):
         print(object_searched)
         print(filter_searched)
         mFits : NouveauxFits = NouveauxFits.NouveauxFits(object_searched)                    
-        paths : list = SkyView.get_images(position=mFits.object, survey=mFits.surveys)
+        paths : list = SkyView.get_images(position=mFits.object, survey=mFits.surveys, pixels=900)
         
         if paths == None:
             print("erreur : objet non trouvé")
