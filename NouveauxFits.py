@@ -1,7 +1,7 @@
 from astropy.io import fits
 from astroquery.skyview import SkyView
 from matplotlib.colors import LogNorm
-import matplotlib.pyplot as plt
+import matplotlib.C as plt
 import os
 import random
 
@@ -40,27 +40,38 @@ class NouveauxFits:
     def setObject(self, object):
         self.object = object
         
+    import os
+
     def chemin_fits(self, paths, survey):
         if paths:
+            # Vérification de l'existence du répertoire de destination
             if not os.path.exists(self.destination_dir):
                 try:
-                    os.makedirs(self.destination_dir)  # Crée le répertoire
+                    os.makedirs(self.destination_dir)  # Crée le répertoire si nécessaire
                 except Exception as e:
                     print(f"Erreur lors de la création du répertoire : {e}")
                     return None
             
-             # Chemin du fichier FIT
-            filename = os.path.join(self.destination_dir, f"{self.object}_{survey}.fit")
-            try:
-                paths[0][0].writeto(filename, overwrite=True)
-                # print(f"IMAGE VOULUE : {filename}")
-                return filename
-            except Exception as e:
-                print(f"Erreur lors de l'écriture du fichier : {e}")
+            # Recherche d'un fichier qui contient à la fois self.object et le survey dans son nom
+            found_file = None
+            for filename in os.listdir(self.destination_dir):
+                if self.object in filename and survey in filename:  # Le fichier doit contenir self.object et survey
+                    found_file = filename
+                    break  # Quitter dès qu'on trouve un fichier correspondant
+
+            if found_file:
+                # Si un fichier correspondant a été trouvé
+                file_path = os.path.join(self.destination_dir, found_file)
+                print(f"Fichier trouvé : {file_path}")
+                return file_path
+            else:
+                print(f"Erreur : aucun fichier trouvé avec '{self.object}' et '{survey}' dans {self.destination_dir}")
                 return None
         else:
             print("Erreur : objet non trouvé ou relevé non disponible")
             return None
+
+
             
     def telecharger_fits(self, paths): 
         # fonction qui télécharge les fits grace à une liste récupérée par le programme sur Skyview
