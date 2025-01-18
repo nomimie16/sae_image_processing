@@ -28,7 +28,7 @@ class Controleur():
             img_data = self.modele.load_fits_data(img_path)
             #affichage des données
             self.vue.ax.clear()
-            self.vue.ax.imshow(img_data, cmap='plasma', origin='lower')
+            self.vue.ax.imshow(img_data, cmap='magma', origin='lower')
             self.vue.ax.set_title(img_path)
             self.vue.ax.axis('on')
             self.vue.canvas.draw()
