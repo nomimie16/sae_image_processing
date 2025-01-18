@@ -7,6 +7,7 @@ from controleur import Controleur
 if __name__ == '__main__':
     
     print(f' --- main --- ')
+    
     app = QApplication(sys.argv)
     
     # fichier_style = open(sys.path[0] + '/style.qss', 'r')

@@ -2,13 +2,16 @@
 
 import os
 import sys
+from astroquery.skyview import SkyView
 from PyQt6.QtGui import QIcon
-from PyQt6.QtCore import pyqtSignal
+from PyQt6.QtCore import pyqtSignal, Qt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QComboBox, QListWidget, QLineEdit, QToolBar, QCompleter
 from modele import Modele
+from astropy.io import fits
+import NouveauxFits
 
 
 
@@ -18,6 +21,7 @@ class VueAstroPy(QMainWindow):
         super().__init__()
         
         self.modele = Modele()
+        
         
         # BARRE DE TITRE -----------------------------------------------------
         self.setWindowTitle('ASTRO')
@@ -46,7 +50,7 @@ class VueAstroPy(QMainWindow):
 
         self.ax = self.figure.add_subplot(111)
         self.central_layout.addWidget(self.toolbar)
-        self.central_layout.addWidget(self.canvas)
+        self.central_layout.addWidget(self.canvas)  
         
         self.display_default_image()
         
@@ -56,12 +60,13 @@ class VueAstroPy(QMainWindow):
 
         # choix de l'objet
         self.labelMission = QLabel("Choisir une mission :")
-        listMission = ['ngc2024','m42', 'andromeda', 'galaxie', 'betelgeuse', 'etacarinae']
+        listMission = ['NGC 2024','M42', 'M82','M12','M31','M104', 'Andromeda Galaxy', 'Betelgeuse', 'Eta Carinae']
         listMission.sort()
         
         resultMission = QCompleter(listMission, self)
         resultMission.setCompletionMode(QCompleter.CompletionMode.PopupCompletion)
         resultMission.setMaxVisibleItems(10)
+        resultMission.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
         
         self.researchMission = QLineEdit()
         self.researchMission.setPlaceholderText('Rechercher une mission ici')
@@ -104,7 +109,13 @@ class VueAstroPy(QMainWindow):
         
         # SLOT vers intérieur --------------------------------------------
         self.btnClose.clicked.connect(self.closeWindow)
-        self.btnValidate.clicked.connect(self.loadFits)
+        # self.btnValidate.clicked.connect(self.loadFits)
+        self.btnValidate.clicked.connect(self.nouveaux_fits)
+        
+        
+        # self.display_image(self.nouveaux_fits())
+        
+        
         
 
     # SLOT vers extérieur ------------------------------------------------
@@ -120,6 +131,26 @@ class VueAstroPy(QMainWindow):
         img_path = "C:/Users/lIcha/Documents/but/2_SAE/SAE_ASTRO_PHOTO/Tarantula_Nebula-halpha.fit"
         self.loadBtnClicked.emit(img_path)
     
+    def nouveaux_fits(self, objet):
+        mFits : NouveauxFits = NouveauxFits.NouveauxFits(objet)                    
+        paths : list = SkyView.get_images(position=mFits.object, survey=mFits.surveys)
+        
+        if paths == None:
+            print("erreur : objet non trouvé")
+        
+        if mFits.fits_existe(paths):
+            mFits.supprimer_fits()
+        else:
+            data = mFits.telecharger_fits(paths)
+            chemin = mFits.chemin_fits(paths,'DSS2 Red')            
+            mFits.supprimer_fits(paths)
+        
+        mFits.supprimer_cache()
+        self.loadBtnClicked.emit(chemin)
+        
+        return chemin
+    
+    
     def display_default_image(self):
         img_default = self.modele.load_image_default()
         if img_default is not None:
@@ -128,7 +159,7 @@ class VueAstroPy(QMainWindow):
             self.ax.set_title('Image par défaut')
             self.ax.axis('off')
             self.canvas.draw()
-
+            
     def center_window(self):
         #Centre la fenêtre
         screen = QApplication.primaryScreen()

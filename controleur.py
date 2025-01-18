@@ -28,8 +28,8 @@ class Controleur():
             img_data = self.modele.load_fits_data(img_path)
             #affichage des données
             self.vue.ax.clear()
-            self.vue.ax.imshow(img_data, cmap='flag_r')
-            self.vue.ax.set_title('Image FITS')
+            self.vue.ax.imshow(img_data, cmap='plasma', origin='lower')
+            self.vue.ax.set_title(img_path)
             self.vue.ax.axis('on')
             self.vue.canvas.draw()
         except FileNotFoundError as e:
