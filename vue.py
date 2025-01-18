@@ -84,16 +84,23 @@ class VueAstroPy(QMainWindow):
         resultFilter.setMaxVisibleItems(10)
         resultFilter.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
         
-        
         self.researchFilter = QLineEdit()
-        self.researchFilter.setPlaceholderText('Rechercher une Object ici')
+        self.researchFilter.setPlaceholderText('Rechercher un Object ici')
         self.researchFilter.setCompleter(resultFilter)
+        
+        # choix du filtre
+        self.labelPixel = QLabel("Choisir un nombre de pixel :")
+        self.listPixel = QComboBox()
+        self.listPixel.addItems(['500', '1000'])
+        
 
         #ajout dans le layout puis la fenetre
         self.selection.addWidget(self.labelObject)
         self.selection.addWidget(self.researchObject)
         self.selection.addWidget(self.labelFilter)
         self.selection.addWidget(self.researchFilter)
+        self.selection.addWidget(self.labelPixel)
+        self.selection.addWidget(self.listPixel)
         
         # bouton valider
         self.btnValidate = QPushButton("GO ! 🚀")
@@ -103,7 +110,7 @@ class VueAstroPy(QMainWindow):
         # FERMETURE DE LA FENÊTRE --------------------------------------------
         self.btnClose = QPushButton("Fermer ❌")
         self.selection.addWidget(self.btnClose)
-               
+
         
         # AFFICHAGE DE LA FENÊTRE --------------------------------------------
         self.central_layout.addLayout(self.selection)
@@ -134,6 +141,7 @@ class VueAstroPy(QMainWindow):
         
         object_searched = self.researchObject.text()
         filter_searched = self.researchFilter.text()
+        pixel_searched = self.listPixel.currentText()
         match filter_searched:
             case "InfraRouge" | "infrarouge" | 'Infrarouge':
                 filter_searched = "DSS2 IR"
@@ -144,9 +152,10 @@ class VueAstroPy(QMainWindow):
                 
         print(object_searched)
         print(filter_searched)
+        print(pixel_searched)
         
         mFits : NouveauxFits = NouveauxFits.NouveauxFits(object_searched)                    
-        paths : list = SkyView.get_images(position=mFits.object, survey=mFits.surveys)
+        paths : list = SkyView.get_images(position=mFits.object, survey=mFits.surveys, pixels = pixel_searched)
         
         if paths == None:
             print("erreur : objet non trouvé")
