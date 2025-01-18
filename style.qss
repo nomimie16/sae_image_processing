@@ -1,0 +1,5 @@
+#bothButton{
+    color: #8671e5;
+    font-weight: bold;
+    font-family: Arial;
+}

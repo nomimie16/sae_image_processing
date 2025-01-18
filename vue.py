@@ -3,7 +3,7 @@
 import os
 import sys
 from astroquery.skyview import SkyView
-from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QIcon, QFont
 from PyQt6.QtCore import pyqtSignal, Qt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -35,10 +35,14 @@ class VueAstroPy(QMainWindow):
 
         # CREATION DES LAYOUTS ----------------------------------------------------------
         self.central_widget = QWidget()
-        self.central_layout = QHBoxLayout(self.central_widget)
+        self.total_layout = QHBoxLayout(self.central_widget)
         
+        # POLICE D'ECRITURE ----------------------------------------------------------
+        fontBig = QFont()
+        fontBig.setPointSize(12)
         
         # LAYOUT IMAGE --------------------------------------------------------
+        self.central_layout = QVBoxLayout()
         self.figure = Figure()
         self.canvas = FigureCanvas(self.figure)
         self.toolbar = NavigationToolbar(self.canvas, self)
@@ -59,9 +63,11 @@ class VueAstroPy(QMainWindow):
         
         # RECHERCHE DE L'UTILISATEUR --------------------------------------------------------
         self.selection = QVBoxLayout()       
+        self.selection.addSpacing(50)
 
         # choix de l'objet
-        self.labelObject = QLabel("Choisir une Object :")
+        self.labelObject = QLabel("Choisir un objet :")
+        self.labelObject.setFont(fontBig)
         listObject = ['NGC 2024','M42', 'M82','M12','M31','M104', 'Andromeda Galaxy', 'Betelgeuse', 'Eta Carinae']
         listObject.sort()
         
@@ -71,51 +77,53 @@ class VueAstroPy(QMainWindow):
         resultObject.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
         
         self.researchObject = QLineEdit()
+        self.researchObject.setFont(fontBig)
+        self.researchObject.setFixedSize(210,40)
         self.researchObject.setPlaceholderText('Rechercher un objet ici')
         self.researchObject.setCompleter(resultObject)
+
         
-        
-        # choix du filtre
-        self.labelFilter = QLabel("Choisir un filtre :")
-        listFilter = ['Bleu', 'InfraRouge', 'Rouge']
-        listFilter.sort()
-        
-        resultFilter = QCompleter(listFilter, self)
-        resultFilter.setCompletionMode(QCompleter.CompletionMode.PopupCompletion)
-        resultFilter.setMaxVisibleItems(10)
-        resultFilter.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
-        
-        self.researchFilter = QLineEdit()
-        self.researchFilter.setPlaceholderText('Rechercher un Object ici')
-        self.researchFilter.setCompleter(resultFilter)
-        
-        # choix du filtre
+        # choix du nb pixel
         self.labelPixel = QLabel("Choisir un nombre de pixel :")
+        self.labelPixel.setFont(fontBig)
         self.listPixel = QComboBox()
+        self.listPixel.setFixedSize(210,40)
+        self.listPixel.setFont(fontBig)
         self.listPixel.addItems(['500', '1000'])
         
 
         #ajout dans le layout puis la fenetre
         self.selection.addWidget(self.labelObject)
+        self.selection.addSpacing(-80)
         self.selection.addWidget(self.researchObject)
-        self.selection.addWidget(self.labelFilter)
-        self.selection.addWidget(self.researchFilter)
         self.selection.addWidget(self.labelPixel)
+        self.selection.addSpacing(-80)
         self.selection.addWidget(self.listPixel) 
+        self.selection.addSpacing(100)
         
         # bouton valider
         self.btnValidate = QPushButton("GO ! 🚀")
+        self.btnValidate.setObjectName("bothButton")
+        self.btnValidate.setFixedSize(210,40)
+        self.btnValidate.setFont(fontBig)
         self.selection.addWidget(self.btnValidate)
         
         
         # FERMETURE DE LA FENÊTRE --------------------------------------------
         self.btnClose = QPushButton("Fermer ❌")
+        self.btnClose.setObjectName("bothButton")
+        self.btnClose.setFixedSize(210,40)
+        self.btnClose.setFont(fontBig)
         self.selection.addWidget(self.btnClose)
 
         
         # AFFICHAGE DE LA FENÊTRE --------------------------------------------
-        self.central_layout.addLayout(self.selection)
+        self.total_layout.addLayout(self.central_layout)
+        self.total_layout.addSpacing(10)
+        self.total_layout.addLayout(self.selection)
+        self.total_layout.addSpacing(10)
         self.setCentralWidget(self.central_widget)
+        self.setFixedSize(800,600)
         self.center_window()
         self.show()
         
@@ -141,18 +149,9 @@ class VueAstroPy(QMainWindow):
     def nouveaux_fits(self):
         
         object_searched = self.researchObject.text()
-        filter_searched = self.researchFilter.text()
         pixel_searched = self.listPixel.currentText()
-        match filter_searched:
-            case "InfraRouge" | "infrarouge" | 'Infrarouge':
-                filter_searched = "DSS2 IR"
-            case "Rouge" | "rouge" :
-                filter_searched = "DSS2 Red"
-            case "Bleu" | "bleu" :
-                filter_searched = "DSS2 Blue"
                 
         print(object_searched)
-        print(filter_searched)
         print(pixel_searched)
         
         mFits : NouveauxFits = NouveauxFits.NouveauxFits(object_searched)    
@@ -165,8 +164,8 @@ class VueAstroPy(QMainWindow):
             mFits.supprimer_fits()
         else:
             data = mFits.telecharger_fits(paths)
-            # mFits.supprimer_fits(paths)
-        
+
+
         # print("FILTRRRRRE",filter_searched)
         traitement = Traitement.Traitement(mFits,paths)
         traitement.load_fits_data()
@@ -186,7 +185,7 @@ class VueAstroPy(QMainWindow):
         if img_default is not None:
             self.ax.clear()
             self.ax.imshow(img_default)
-            self.ax.set_title('Bienvenue sur notre application de traitement d/image')
+
             self.ax.axis('off')
             self.canvas.draw()
             
