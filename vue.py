@@ -123,7 +123,7 @@ class VueAstroPy(QMainWindow):
         self.btnClose.clicked.connect(self.closeWindow)
         self.btnValidate.clicked.connect(self.nouveaux_fits)
                 
-        # self.display_image(self.nouveaux_fits())
+        # self.display_image(self.nouveaux_fits()) 
         
         
     # SLOT vers extérieur ------------------------------------------------
