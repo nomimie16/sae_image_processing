@@ -25,13 +25,3 @@ class Modele:
 
 
 
-
-
-    def getSurveys(self):
-        return self.surveys
-    
-    def getObject(self):
-        return self.object
-    
-    def setObject(self, object):
-        self.object = object
