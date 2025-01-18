@@ -11,7 +11,8 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as Navigatio
 from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QComboBox, QListWidget, QLineEdit, QToolBar, QCompleter
 from modele import Modele
 from astropy.io import fits
-import NouveauxFits
+import json
+import NouveauxFits, Traitement
 
 
 
@@ -153,7 +154,7 @@ class VueAstroPy(QMainWindow):
         print(object_searched)
         print(pixel_searched)
         
-        mFits : NouveauxFits = NouveauxFits.NouveauxFits(object_searched)                    
+        mFits : NouveauxFits = NouveauxFits.NouveauxFits(object_searched)    
         paths : list = SkyView.get_images(position=mFits.object, survey=mFits.surveys, pixels = pixel_searched)
         
         if paths == None:
@@ -163,13 +164,20 @@ class VueAstroPy(QMainWindow):
             mFits.supprimer_fits()
         else:
             data = mFits.telecharger_fits(paths)
-            chemin = mFits.chemin_fits(paths)            
-            mFits.supprimer_fits(paths)
+
+
+        # print("FILTRRRRRE",filter_searched)
+        traitement = Traitement.Traitement(mFits,paths)
+        traitement.load_fits_data()
+        traitement.normalize_data()
+        data_img = traitement.getColors()
+        data_str = json.dumps(data_img.tolist())
         
+        # print(data_img)
+        self.loadBtnClicked.emit(data_str)
         mFits.supprimer_cache()
-        self.loadBtnClicked.emit(chemin)
         
-        return chemin
+        return data_img
     
     #Affiche l'image de base
     def display_default_image(self):
@@ -177,6 +185,7 @@ class VueAstroPy(QMainWindow):
         if img_default is not None:
             self.ax.clear()
             self.ax.imshow(img_default)
+
             self.ax.axis('off')
             self.canvas.draw()
             

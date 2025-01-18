@@ -5,6 +5,8 @@ from PyQt6.QtWidgets import QMessageBox, QComboBox, QFileDialog
 from PyQt6.QtGui import QIcon
 from modele import Modele
 from vue import VueAstroPy
+import json
+import numpy as np
 
 
 class Controleur():
@@ -23,14 +25,17 @@ class Controleur():
     def closeW(self):
         self.vue.close()
 
-    def load_img(self, img_path):
+    def load_img(self, data_json):
         try:
-            img_data = self.modele.load_fits_data(img_path)
+            received_data = json.loads(data_json)  # Décoder le JSON
+            img_data = np.array(received_data)
+            # img_data = img_path
+            print("IMMMMMGGG_______PATHHHHHH",received_data)
             #affichage des données
             self.vue.ax.clear()
-            self.vue.ax.imshow(img_data, cmap='magma', origin='lower')
-            self.vue.ax.set_title(img_path)
+            self.vue.ax.imshow(img_data, origin='lower')
+            self.vue.ax.set_title("Astroquery")
             self.vue.ax.axis('on')
             self.vue.canvas.draw()
         except FileNotFoundError as e:
-            print(e)
+            print("ftgvrhbndnjd,s",e)
