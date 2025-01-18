@@ -76,12 +76,14 @@ class VueAstroPy(QMainWindow):
         
         # choix du filtre
         self.labelFilter = QLabel("Choisir un filtre :")
-        listFilter = ['visible', 'rayon X', 'infrarouge', 'ultraviolet']
+        listFilter = ['Bleu', 'InfraRouge', 'Rouge']
         listFilter.sort()
         
         resultFilter = QCompleter(listFilter, self)
         resultFilter.setCompletionMode(QCompleter.CompletionMode.PopupCompletion)
         resultFilter.setMaxVisibleItems(10)
+        resultFilter.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
+        
         
         self.researchFilter = QLineEdit()
         self.researchFilter.setPlaceholderText('Rechercher une Object ici')
@@ -129,10 +131,20 @@ class VueAstroPy(QMainWindow):
         self.closeBtnClicked.emit()
     
     def nouveaux_fits(self):
+        
         object_searched = self.researchObject.text()
         filter_searched = self.researchFilter.text()
+        match filter_searched:
+            case "InfraRouge" | "infrarouge" | 'Infrarouge':
+                filter_searched = "DSS2 IR"
+            case "Rouge" | "rouge" :
+                filter_searched = "DSS2 Red"
+            case "Bleu" | "bleu" :
+                filter_searched = "DSS2 Blue"
+                
         print(object_searched)
         print(filter_searched)
+        
         mFits : NouveauxFits = NouveauxFits.NouveauxFits(object_searched)                    
         paths : list = SkyView.get_images(position=mFits.object, survey=mFits.surveys, pixels=900)
         
