@@ -21,7 +21,3 @@ class Modele:
         else:
             print(f"Image non trouvée à : {img_path}")
             return None
-
-
-
-
