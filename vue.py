@@ -95,6 +95,7 @@ class VueAstroPy(QMainWindow):
         # bouton valider
         self.btnValidate = QPushButton("GO ! 🚀")
         self.selection.addWidget(self.btnValidate)
+        self.btnValidate.clicked.connect(self.on_btn_validate_clicked)
         
         # FERMETURE DE LA FENÊTRE --------------------------------------------
         self.btnClose = QPushButton("Fermer ❌")
@@ -130,7 +131,13 @@ class VueAstroPy(QMainWindow):
     def loadFits(self):
         img_path = "C:/Users/lIcha/Documents/but/2_SAE/SAE_ASTRO_PHOTO/Tarantula_Nebula-halpha.fit"
         self.loadBtnClicked.emit(img_path)
-    
+        
+    def on_btn_validate_clicked(self):
+        # Récupérer le texte saisi dans le QLineEdit
+        mission = self.researchMission.text()
+        print(f"Mission choisie : {mission}")
+        return mission
+        
     def nouveaux_fits(self, objet):
         mFits : NouveauxFits = NouveauxFits.NouveauxFits(objet)                    
         paths : list = SkyView.get_images(position=mFits.object, survey=mFits.surveys)
