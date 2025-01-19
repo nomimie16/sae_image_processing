@@ -4,6 +4,7 @@
 
 ⚠ L'affichage entre chaque objet dépend du nombre de pixel et peut durer parfois plusieurs secondes jusqu'à quelques minutes.
 ⚠ Soyez patient lorsque vous lancez une recherche.
+⚠ SI l'objet choisit est inconnu il afffiche un objet au hasard
 
 
 ## Pour le lancement de l'application astrophoto :

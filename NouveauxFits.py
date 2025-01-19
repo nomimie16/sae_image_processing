@@ -11,21 +11,19 @@ class NouveauxFits:
     def __init__(self, object=None):
         # filtres
         self.surveys = ['DSS2 Red', 'DSS2 Blue', 'DSS2 IR']
-        # self.surveys = ['2MASS-J', '2MASS-H', '2MASS-K']
-        # self.surveys = ['SwiftXRTCnt', 'SwiftXRTExp', 'SwiftXRTInt']
-        # self.surveys = ['RASS Background 1', 'RASS Background 2', 'RASS Background 3']
+        liste_fits=['NGC 2024', 'NGC 2237', 'IC 434', 'NGC 4631' 'M82','M45','M42','M31','M104', 'M87', 'SH 2-308', 'IC 5070', 'Rho Ophiuchi', 'Alnitak', 'Rigel','Barnard 33', 'Andromeda Galaxy', 'Betelgeuse', 'Eta Carinae']
+
     # Exemples de relevés à utiliser
         # self.surveys = ['2MASS-J', 'GALEX Near UV', 'DSS2 Red']
-
-        
-        
+        # self.surveys = ['SwiftXRTCnt', 'SwiftXRTExp', 'SwiftXRTInt']
+        # self.surveys = ['RASS Background 1', 'RASS Background 2', 'RASS Background 3']
         
         # si on a un parametre on l'utilise pour choisir l'objet
-        if object:
+        if object in liste_fits:
             self.object = object           
         #sinon on choisit un objet au hasard   
         else:
-            liste_fits=['NGC 2024', 'NGC 2237', 'M82','M45','M42','M31','M104', 'M87', 'Andromeda Galaxy', 'Betelgeuse', 'Eta Carinae']
+            print("Pas d'image choisie /  Image non Reconnu")
             num = random.randint(0, len(liste_fits)-1)
             self.object = liste_fits[num]
         
@@ -124,7 +122,7 @@ class NouveauxFits:
         
 if __name__ == '__main__':
     
-    mFits : NouveauxFits = NouveauxFits('M82')
+    mFits : NouveauxFits = NouveauxFits('Alnit')
     # mFits = NouveauxFits()
     
     paths : list = SkyView.get_images(position=mFits.object, survey=mFits.surveys, pixels=100)

@@ -68,7 +68,7 @@ class VueAstroPy(QMainWindow):
         # choix de l'objet
         self.labelObject = QLabel("Choisir un objet :")
         self.labelObject.setFont(fontBig)
-        listObject = ['NGC 2024','M42', 'M82','M12','M31','M104', 'Andromeda Galaxy', 'Betelgeuse', 'Eta Carinae']
+        listObject = ['NGC 2024', 'NGC 2237', 'Alnitak', 'NGC 4631', 'M82','M45','M42','M31','M104', 'M87', 'IC 434', 'IC 5070', 'Rigel', 'Barnard 33', 'SH 2-308', 'Andromeda Galaxy', 'Betelgeuse', 'Eta Carinae']
         listObject.sort()
         
         resultObject = QCompleter(listObject, self)
