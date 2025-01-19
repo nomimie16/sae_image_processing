@@ -11,7 +11,7 @@ class NouveauxFits:
     def __init__(self, object=None):
         # filtres
         self.surveys = ['DSS2 Red', 'DSS2 Blue', 'DSS2 IR']
-        liste_fits=['NGC 2024', 'NGC 2237', 'IC 434', 'NGC 4631' 'M82','M45','M42','M31','M104', 'M87', 'SH 2-308', 'IC 5070', 'Rho Ophiuchi', 'Alnitak', 'Rigel','Barnard 33', 'Andromeda Galaxy', 'Betelgeuse', 'Eta Carinae']
+        liste_fits=['NGC 2024', 'NGC 2237', 'IC 434', 'NGC 4631','M82','M45','M42','M31','M104', 'M87', 'SH 2-308', 'IC 5070', 'Rho Ophiuchi', 'Alnitak', 'Rigel','Barnard 33', 'Andromeda Galaxy', 'Betelgeuse', 'Eta Carinae']
 
     # Exemples de relevés à utiliser
         # self.surveys = ['2MASS-J', 'GALEX Near UV', 'DSS2 Red']
