@@ -1,7 +1,7 @@
-# # Dependances liées a notre application Astrophoto :
+# # Dependances liées à notre application Astrophoto :
 
 
-Veuillez a installer / importer ces bibliotheque avant execution :
+Veuillez à installer / importer ces bibliotheques avant execution :
 
 
 - astropy
