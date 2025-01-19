@@ -37,6 +37,7 @@
     Methodes :
         -> gettter (objet, surveys)
         -> setter (objet)
+        -> chemin_fits(paths, surveys) : fonction qui retrouve le chemin d'un fichier enregistré en fonction d'un spectre voulu
         -> telecharger_fits() : fonction qui télécharge les fits grace a une liste récupérée par le programme sur Skyview
         -> fits_existe() : fonction qui vérifie si les fits existent
         -> supprimer_fits() : fonction qui supprime les fits
