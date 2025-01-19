@@ -1,5 +1,5 @@
 # SAE - Traitement d'images Astrophoto
-Algorithme du 18 janvier 
+✎ Algorithme du 18 janvier 
 
 
 ⚠ L'affichage entre chaque objet dépend du nombre de pixel et peut durer parfois plusieurs secondes jusqu'à quelques minutes.
@@ -12,17 +12,17 @@ Algorithme du 18 janvier
 
 ##### Une fois l'application lancée,
 
-1. Chosssisez votre objet celeste dans la barre de recherche (si vous n'avez pas d'idée tapez une lettre des noms apparaîtrons)
+1. Chosssisez votre objet celeste dans la barre de recherche (si vous n'avez pas d'idée tapez une lettre, des noms apparaîtrons)
 
-⚠ Si aucun objet n'est choisi alors l'application choisira un objet pour vous, ne vous inquitez pas ;)
+⚠ Si aucun objet n'est choisi alors l'application choisira un objet pour vous, ne vous inquiètez pas ;)
 
-2. Choissisez le nombre de pixels voulu (plus de pixel = meilleur résolution mais + de temps d'attente).
+2. Choissisez le nombre de pixels voulus (+ de pixel = meilleure résolution mais + de temps d'attente).
 
 3. Appuyez sur le boton de lancement "Go 🚀" et attendez.
 
 🚀 Et voilà , après quelques secondes vous devriez arriver dans l'espace et observer votre objet celeste sous forme d'image fit traitée selon 3 spectre , Rouge Bleu Et infrarouge. 🚀
 
-Contenu des fichiers sources :
+#### Contenu des fichiers sources :
 
 NouveauxFits.py 
 
