@@ -1,5 +1,5 @@
 # SAE - Traitement d'images Astrophoto
-## LIGNIEZ Noémie - CHATELAIN Lilou
+## LIGNIER Noémie - CHATELAIN Lilou
 ✎ Algorithme du 18 janvier 
 
 
