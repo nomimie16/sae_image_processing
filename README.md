@@ -24,7 +24,7 @@
 
 ### Contenu des fichiers sources :
 
-NouveauxFits.py 
+```NouveauxFits.py ```
 
     - Classe qui permet de créer (télécharger) des fichiers fit(s) dans un dossier image.
 
@@ -41,7 +41,7 @@ NouveauxFits.py
         -> afficher_fits() : fonction qui affiche les fits à l'aide de matplotlib
 
 
-Traitement.py :
+```Traitement.py``` :
 
     - Classe qui s'occupe du traitement des images FIts
 
@@ -57,7 +57,7 @@ Traitement.py :
         -> normalize_data(self) : fonction qui utilise une matrice afin du superposer les data de chaque images dans les couleurs
         -> get Colors() : renvoit les couleurs pour afficher l'image traitée
 
-MVC (modele, vue , controleur):
+```MVC``` (modele, vue , controleur):
 
     - Interface qui contient l'affichage de boutons, images(matplolib), barre de recherche pour l'utilisateur
     - Utlise la classe NouveauxFits et la classe Traitement
