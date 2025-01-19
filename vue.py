@@ -68,7 +68,7 @@ class VueAstroPy(QMainWindow):
         # choix de l'objet
         self.labelObject = QLabel("Choisir un objet :")
         self.labelObject.setFont(fontBig)
-        listObject = ['NGC 2024', 'NGC 2237', 'Alnitak', 'NGC 4631', 'M82','M45','M42','M31','M104', 'M87', 'IC 434', 'IC 5070', 'Rigel', 'Barnard 33', 'SH 2-308', 'Andromeda Galaxy', 'Betelgeuse', 'Eta Carinae']
+        listObject = ['Vega', 'Meissa', 'Alnilam', 'Deneb','NGC 7635','NGC 2024', 'IC 5070', 'IC 435', 'NGC 2237', 'Alnitak', 'NGC 4631', 'M82','M45','M42','M31','M104', 'M87', 'IC 434', 'IC 5070', 'Rigel', 'Barnard 33', 'SH 2-308', 'Andromeda Galaxy', 'Betelgeuse', 'Roslund 4','Barnard’s Loop']
         listObject.sort()
         
         resultObject = QCompleter(listObject, self)
@@ -89,7 +89,7 @@ class VueAstroPy(QMainWindow):
         self.listPixel = QComboBox()
         self.listPixel.setFixedSize(210,40)
         self.listPixel.setFont(fontBig)
-        self.listPixel.addItems(['500', '1000'])
+        self.listPixel.addItems(['500', '1000','1300','1800'])
         
 
         #ajout dans le layout puis la fenetre

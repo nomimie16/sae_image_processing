@@ -26,14 +26,15 @@ class Controleur():
         self.vue.close()
 
     def load_img(self, data_json):
+        titre = self.vue.researchObject.text()
         try:
             received_data = json.loads(data_json)  # Décoder le JSON
             img_data = np.array(received_data)
             #affichage des données
             self.vue.ax.clear()
             self.vue.ax.imshow(img_data, origin='lower')
-            self.vue.ax.set_title("Astroquery")
+            self.vue.ax.set_title(titre)
             self.vue.ax.axis('on')
             self.vue.canvas.draw()
         except FileNotFoundError as e:
-            print("ftgvrhbndnjd,s",e)
+            print(" ⚠ Pas de fichier fits à afficher",e)
