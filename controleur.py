@@ -29,8 +29,6 @@ class Controleur():
         try:
             received_data = json.loads(data_json)  # Décoder le JSON
             img_data = np.array(received_data)
-            # img_data = img_path
-            print("IMMMMMGGG_______PATHHHHHH",received_data)
             #affichage des données
             self.vue.ax.clear()
             self.vue.ax.imshow(img_data, origin='lower')

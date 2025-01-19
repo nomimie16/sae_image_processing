@@ -1,5 +1,9 @@
 ### SAE - Traitement d'images Astrophoto
-Algorithme du 16 janvier 
+Algorithme du 18 janvier 
+
+
+⚠ L'affichage entre chaque objet dépend du nombre de pixel et peut durer parfois plusieurs secondes jusqu'à quelques minutes.
+⚠ Soyez patient lorsque vous lancez une recherche.
 
 
 NouveauxFits.py 
@@ -17,6 +21,32 @@ NouveauxFits.py
         -> fits_existe() : fonction qui vérifie si les fits existent
         -> supprimer_fits() : fonction qui supprime les fits
         -> afficher_fits() : fonction qui affiche les fits à l'aide de matplotlib
+
+
+Traitement.py :
+
+    - Classe qui s'occupe du traitement des images FIts
+
+    - Constructeur 
+        ->  Prends en parametre un groupe de 3 fit et un telechargement d'images
+        -> self.red_file : chemin du fichier fit rouge
+        -> self.blue_file : chemin du fichier fit bleu
+        -> self.ir_file : chemin du fihier fits infrarouge
+        -> self.colors : couleurs des 3 images rassemblées
+
+    Methodes :
+        -> load_fits_data() : fonction qui recuprere les data des 3 fichiers fits rassemblés
+        -> normalize_data(self) : fonction qui utilise une matrice afin du superposer les data de chaque images dans les couleurs
+        -> get Colors() : renvoit les couleurs pour afficher l'image traitée
+
+MVC (modele, vue , controleur):
+
+    - Interface qui contient l'affichage de boutons, images(matplolib), barre de recherche pour l'utilisateur
+    - Utlise la classe NouveauxFits et la classe Traitement
+    - La vue envoie les donnée de l'image traitée dans un json qui est ensuite remit sous forme de données(data) pour ouvrir l'image dans le controleur avec matplolib. C'est cette éxecution qui ralentit l'affichage mais c'est la seule solutions qui nous avons trouvé.
+
+
+
 
 [![Astro Orion](https://preview.redd.it/91nf9brtt8zd1.jpeg?auto=webp&s=5be84d3f0800042c8f2fc88ec75b35aad8aee2a6)](https://preview.redd.it/91nf9brtt8zd1.jpeg?auto=webp&s=5be84d3f0800042c8f2fc88ec75b35aad8aee2a6)
 

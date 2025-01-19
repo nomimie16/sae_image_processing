@@ -1,0 +1,15 @@
+# # Dependances liées a notre application Astrophoto :
+
+
+Veuillez a installer / importer ces bibliotheque avant execution :
+
+
+- astropy
+- astroquery
+- SkyView
+- Matplotlib
+- Pyplot
+- PyQt6
+
+(Optinnel : programme de recherche avec Mast)
+- Mast

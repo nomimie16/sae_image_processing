@@ -29,9 +29,7 @@ class Traitement:
             color.append(normalized)
         self.colors = np.dstack([color[0],color[1],color[2]])
         
-    # def save(self,data):
-    #     if self.colors is None:
-    #         print( "Erreur les données ne sont pas normalisées")
+
     
     def getColors(self):
         return self.colors
