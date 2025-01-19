@@ -1,4 +1,4 @@
-### SAE - Traitement d'images Astrophoto
+# SAE - Traitement d'images Astrophoto
 Algorithme du 18 janvier 
 
 
