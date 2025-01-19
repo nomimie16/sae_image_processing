@@ -10,7 +10,7 @@ Algorithme du 18 janvier
 
 - Executez le programme ```main.py``` via un terminal ou directement depuis VisualStudioCode grace à l'icone d'execution en forme de flêche (situé en haut à gauche)
 
-Une fois l'application lancée,
+##### Une fois l'application lancée,
 
 1. Chosssisez votre objet celeste dans la barre de recherche (si vous n'avez pas d'idée tapez une lettre des noms apparaîtrons)
 
