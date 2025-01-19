@@ -1,4 +1,4 @@
-# # # SAE - Traitement d'images Astrophoto
+### SAE - Traitement d'images Astrophoto
 Algorithme du 18 janvier 
 
 
@@ -6,7 +6,7 @@ Algorithme du 18 janvier
 ⚠ Soyez patient lorsque vous lancez une recherche.
 
 
-# Pour le lancement de l'application astrophoto :
+## Pour le lancement de l'application astrophoto :
 
 - Executez le programme ```main.py``` via un terminal ou directement depuis VisualStudioCode grace à l'icone d'execution en forme de flêche (situé en haut à gauche)
 
